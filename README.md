@@ -11,9 +11,11 @@ This is a Java Spring Boot application that provides the telemetry data and send
 ### Pipeline
 The generated data will then be transmitted to a pipeline for transformation. This is done by a Python app, which collects the datapoints from the message broker queue and calculates the moving average for a batch of datapoints. The average is linearly weighted to give the more recent datapoints a higher weight than the older ones.
 
-$$ x_av = \sum\limit_{i=1}^{N_bs} w_i x_i $$
+![eq1](http://www.sciweavers.org/tex2img.php?eq=x_%7Bav%7D%20%3D%20%5Csum%5Climits_%7Bi%3D1%7D%5E%7BN_%7Bbs%7D%7D%20w_i%20x_i&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
+
 with
-$$ w_i = \fraq{i}{\sum\limit_{i=1}^{N_bs} i} $$
+
+![eq2](http://www.sciweavers.org/tex2img.php?eq=w_i%20%3D%20%5Cfrac%7Bi%7D%7B%5Csum%5Climits_%7Bi%3D1%7D%5E%7BN_%7Bbs%7D%7D%20i%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
 
 After transformation the data is again transmitted to a queue in the message broker.
 
