@@ -49,7 +49,7 @@ def callback(ch, method, properties, body):
     for i in range(len(datapoints)):
         averageBatch[i, 0] = datapoints[i]
     if (count < batchSize):
-        movingAverages = [None for _ in range(batchSize)]
+        movingAverages = [None for _ in range(len(datapoints))]
     else:
         movingAverages = np.dot(averageBatch, weightVector).tolist()
     emitData(dataToJson(timestamp, datapoints, movingAverages))
