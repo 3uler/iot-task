@@ -1,0 +1,6 @@
+bin
+lib
+include
+.vscode
+.DS_Store
+.Python
