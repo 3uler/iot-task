@@ -27,7 +27,7 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
 
   collector:
-    image: iot-collector-app
+    build: ./collector
     depends_on:
     - rabbitmq
     - mongo
@@ -40,18 +40,18 @@ services:
       unless-stopped
 
   pipeline:
-    image: iot-pipeline-app
+    build: ./pipeline
     depends_on:
     - rabbitmq
     - mongo
     environment:
       - "RABBIT_HOST=rabbitmq"
-      - "BATCH_SIZE=1"
+      - "BATCH_SIZE=5"
     restart:
       always
 
   mongo-client:
-    image: mongo-client-app
+    build: ./mongo-client
     depends_on:
       - rabbitmq
       - mongo
@@ -63,7 +63,7 @@ services:
       always
 
   web-client-be:
-    image: iot-client-be
+    build: ./iot-client-be
     depends_on:
       - rabbitmq
     environment:
@@ -74,7 +74,7 @@ services:
       always
 
   web-client:
-    image: iot-web-client
+    build: ./iot-client
     ports:
       - 80:80
     restart:
