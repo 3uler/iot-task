@@ -29,9 +29,9 @@ This is a simple Python application that takes the data from the broker and writ
 There is also an Angular web client to visualize the data as a chart.
 
 ## Installation Instruction
-There is a docker-compose file provided to run the whole chain of services. But first you have to build all the relevant docker images. In every subdirectory of the previously described services you will find a readme with instructions on how to build the image. After having built all images simply run
+There is a docker-compose file provided to build docker images and run the whole chain of services. Simply run
 ```
-docker-compose up
+docker-compose up --build
 ```
 to start the whole chain. Since docker-compose does not provide a good way on starting services time delayed, there will occur some errors in the beginning when services can not connect to the broker since it is not ready yet. They will then simply restart and try to reconnect until everything is ready. In the compose file you can specify the batch size for the moving average via an environment variable (BATCH_SIZE) for the pipeline service.
 
